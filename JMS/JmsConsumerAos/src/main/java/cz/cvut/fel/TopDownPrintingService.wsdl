@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="cz.cvut.fel" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="PrintingServiceService" targetNamespace="cz.cvut.fel">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="cz.cvut.fel" elementFormDefault="unqualified" targetNamespace="cz.cvut.fel" version="1.0">
+
+  <xs:element name="processEmail" type="tns:processEmail"/>
+
+  <xs:element name="processEmailResponse" type="tns:processEmailResponse"/>
+
+  <xs:complexType name="processEmail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="tns:SendEmailRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SendEmailRequest">
+    <xs:sequence>
+      <xs:element name="email" type="tns:Email"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Email">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="subject" type="xs:string"/>
+      <xs:element name="text" type="xs:string"/>
+      <xs:element name="sender" type="tns:User"/>
+      <xs:element name="receiver" type="tns:User"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+	  <xs:element name="emailAddress" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="processEmailResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="response" type="tns:SendEmailResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SendEmailResponse">
+    <xs:sequence>
+      <xs:element name="result" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="processEmail">
+    <wsdl:part element="tns:processEmail" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processEmailResponse">
+    <wsdl:part element="tns:processEmailResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PrintingService">
+    <wsdl:operation name="processEmail">
+      <wsdl:input message="tns:processEmail" name="processEmail">
+    </wsdl:input>
+      <wsdl:output message="tns:processEmailResponse" name="processEmailResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PrintingServiceServiceSoapBinding" type="tns:PrintingService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="processEmail">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="processEmail">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processEmailResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PrintingServiceService">
+    <wsdl:port binding="tns:PrintingServiceServiceSoapBinding" name="PrintingServicePort">
+      <soap:address location="http://localhost:8081/wsdlfirstws/services/printingService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
