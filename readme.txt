@@ -79,3 +79,5 @@ treba pridat DATA FORM username a password....
 KOMUNIKACIA S DALSIMI WEB SERVICES
 javafirstws (treba rozbehat napr. na tomcate port 8081) - /reservation/print/1 - vytlaci letenku
 wsdlfirstws (tiez bezi na porte 8081) treba k nej zapnut AOSJmsConsumer a ActiveMQ. Do activeMQ sa budu ukladat spravy consumer kazdych 5 sekund prijme spravu (pri vytlaceni letenky posle email)
+activeMQ zapnut cez gitbash tools/ativeMQ/bin - ./activemq start
+admin konzola http://localhost:8161/admin/queues.jsp (admin:admin)
